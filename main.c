@@ -1,67 +1,99 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 #define tamanho 5
-
-struct tpilha {
+    struct tfila {
     int dados[tamanho];
     int ini;
     int fim;
     };
-struct tpilha pilha;
 
-int main()
-{
-    int op = 1;
-    pilha.ini = 0;
-    pilha.fim = 0;
-    while (op != 0) {
-        pilha_mostrar();
-        menu_mostrar();
-        scanf("%d", &op);
-        switch (op) {
+    struct tfila fila;
+    int op;
+
+    void fila_entrar();
+    void fila_sair();
+    void fila_mostrar();
+    void menu_mostrar();
+
+    int main(){
+        setlocale( LC_ALL, "Portuguese");
+        op = 1;
+        fila.ini = 0;
+        fila.fim = 0;
+        while (op != 0) {
+            system("clear");
+            fila_mostrar();
+            menu_mostrar();
+            scanf("%d", &op);
+            switch (op) {
             case 1:
-                pilha_entrar();
+                fila_entrar();
                 break;
             case 2:
-                pilha_sair();
+                fila_sair();
                 break;
                 }
-            }
+        }
     return 0;
 }
 
-void pilha_mostrar() {
-    int i;
-    printf("[ ");
-    for (i=0; i<tamanho; i++) {
-        printf("%d ", pilha.dados[i]);
+void fila_entrar() {
+        if (fila.fim == tamanho) {
+            printf("\nA fila está cheia, volte outro dia! \n\n");
         }
-    printf("] \n\n");
+        else {
+            printf("\n Digite o valor a ser inserido: ");
+            scanf("%d", &fila.dados[fila.fim]);
+            fila.fim++;
+        }
 }
 
-void pilha_entrar () {
-    if (pilha.fim == tamanho) {
-        printf("A pilha esta cheia impossivel empilhar mais elementos \n");
-        }
-    else {
-    printf("Digite o valor a ser empilhado:");
-    scanf("%d", &pilha.dados[pilha.fim]);
-    pilha.fim++;
-}}
-
-void pilha_sair () {
-     if (pilha.ini == pilha.fim) {
-        printf("A pilha esta vazia nao tem nada para desempilhar \n");
-        }
-    else {
-    pilha.dados[pilha.fim-1] = 0 ;
-    pilha.fim --;
+void fila_sair() {
+    if (fila.ini == fila.fim) {
+        printf("\n Fila vazia, mas logo aparece alguém! \n\n");
     }
+    else {
+        int i;
+        for (i = 0; i<tamanho; i++) {
+            fila.dados[i] = fila.dados[i];
+        }
+        fila.dados[fila.fim] = 0;
+        fila.fim--;
+    }
+}
+
+void fila_mostrar() {
+    int i;
+    printf("[ ");
+    for (i = 0; i<tamanho; i++) {
+        printf("%d", fila.dados[i]);
+    }
+    printf("] \n\n");
 }
 
 void menu_mostrar() {
     printf("\n Escolha uma opção: \n");
-    printf("1 - Empilhar \n");
-    printf("2 - Desimpilhar \n");
-    printf("0 - Sair \n\n");
+    printf("1 - Incluir na fila\n");
+    printf("2 - Excluir da fila\n");
+    printf("0 - Sair\n\n");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
